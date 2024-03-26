@@ -234,6 +234,24 @@ bool IsSorted(Array arr) {
   return true;
 }
 
+void MoveNegativesForLeftSide(Array *arr) {
+  int i = 0;
+  int j = arr->length;
+
+  while (i < j) {
+    while (arr->A[i] < 0) {
+      i++;
+    }
+    while (arr->A[j] > 0) {
+      j--;
+    }
+
+    if (i < j) {
+      swap(&arr->A[i], &arr->A[j]);
+    }
+  }
+}
+
 int main() {
   Array arr = {{2, 3, 4, 5, 6}, 10, 5};
 
@@ -286,8 +304,12 @@ int main() {
   InsertSorted(&arr, 3);
   printf("Number 3 sorted inserted: ");
   Display(&arr);
-
   printf("Array is sorted? %d\n", IsSorted(arr));
+
+  Array arr2 = {{-2, 3, 14, 5, -6, 10, -5, 22, 1, -8}, 10, 10};
+  printf("Negatives moved for the left side: ");
+  MoveNegativesForLeftSide(&arr2);
+  Display(&arr2);
 
   return 0;
 }
