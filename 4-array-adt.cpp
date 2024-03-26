@@ -252,6 +252,32 @@ void MoveNegativesForLeftSide(Array *arr) {
   }
 }
 
+Array *Merge(Array m, Array n) {
+  Array *result = new Array;
+  result->length = m.length + n.length;
+  result->size = m.size + n.size;
+
+  int i = 0, j = 0, k = 0;
+
+  while (i < m.length && j < n.length) {
+    if (m.A[i] < n.A[j]) {
+      result->A[k++] = m.A[i++];
+    } else {
+      result->A[k++] = n.A[j++];
+    }
+  }
+
+  for (; i < m.length; i++) {
+    result->A[k++] = m.A[i];
+  }
+
+  for (; j < n.length; j++) {
+    result->A[k++] = n.A[j];
+  }
+
+  return result;
+}
+
 int main() {
   Array arr = {{2, 3, 4, 5, 6}, 10, 5};
 
@@ -306,10 +332,23 @@ int main() {
   Display(&arr);
   printf("Array is sorted? %d\n", IsSorted(arr));
 
-  Array arr2 = {{-2, 3, 14, 5, -6, 10, -5, 22, 1, -8}, 10, 10};
-  printf("Negatives moved for the left side: ");
-  MoveNegativesForLeftSide(&arr2);
+  // Array arr2 = {{-2, 3, 14, 5, -6, 10, -5, 22, 1, -8}, 10, 10};
+  // printf("Negatives moved for the left side: ");
+  // MoveNegativesForLeftSide(&arr2);
+  // Display(&arr2);
+
+  Array arr1 = {{2, 5, 8, 10, 16}, 10, 5};
+  Array arr2 = {{1, 3, 14, 21, 23}, 10, 5};
+
+  printf("-------------------\n");
+  printf("arr1: ");
+  Display(&arr1);
+  printf("arr2: ");
   Display(&arr2);
+
+  Array *mergedArr = Merge(arr1, arr2);
+  printf("Arrays merged: ");
+  Display(mergedArr);
 
   return 0;
 }
