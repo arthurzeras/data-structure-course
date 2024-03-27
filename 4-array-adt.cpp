@@ -278,19 +278,40 @@ Array *Merge(Array m, Array n) {
   return result;
 }
 
-int main() {
-  Array arr = {{2, 3, 4, 5, 6}, 10, 5};
+Array *UnionUnsorted(Array m, Array n) {
+  Array *result = new Array;
+  result->length = m.length;
 
-  Display(&arr);
-  Add(&arr, 7);
-  Add(&arr, 8);
-  Add(&arr, 9);
-  Display(&arr);
-  Insert(&arr, 0, 1);
-  Display(&arr);
-  int deleted = Delete(&arr, 2);
-  printf("Element deleted: %d \n", deleted);
-  Display(&arr);
+  int i;
+
+  for (i = 0; i < m.length; i++) {
+    result->A[i] = m.A[i];
+  }
+
+  for (int j = 0; j < n.length; j++) {
+    if (LinearSearch(&m, n.A[j]) == -1) {
+      result->A[i] = n.A[j];
+      result->length++;
+      i++;
+    }
+  }
+
+  return result;
+}
+
+int main() {
+  // Array arr = {{2, 3, 4, 5, 6}, 10, 5};
+
+  // Display(&arr);
+  // Add(&arr, 7);
+  // Add(&arr, 8);
+  // Add(&arr, 9);
+  // Display(&arr);
+  // Insert(&arr, 0, 1);
+  // Display(&arr);
+  // int deleted = Delete(&arr, 2);
+  // printf("Element deleted: %d \n", deleted);
+  // Display(&arr);
   // int index = LinearSearch(&arr, 6, true);
   // printf("Element found at index: %d \n", index);
   // Display(&arr);
@@ -327,28 +348,35 @@ int main() {
   // printf("Array right rotated: ");
   // Display(&arr);
 
-  InsertSorted(&arr, 3);
-  printf("Number 3 sorted inserted: ");
-  Display(&arr);
-  printf("Array is sorted? %d\n", IsSorted(arr));
+  // InsertSorted(&arr, 3);
+  // printf("Number 3 sorted inserted: ");
+  // Display(&arr);
+  // printf("Array is sorted? %d\n", IsSorted(arr));
 
   // Array arr2 = {{-2, 3, 14, 5, -6, 10, -5, 22, 1, -8}, 10, 10};
   // printf("Negatives moved for the left side: ");
   // MoveNegativesForLeftSide(&arr2);
   // Display(&arr2);
 
-  Array arr1 = {{2, 5, 8, 10, 16}, 10, 5};
-  Array arr2 = {{1, 3, 14, 21, 23}, 10, 5};
+  // Array arr1 = {{2, 5, 8, 10, 16}, 10, 5};
+  // Array arr2 = {{1, 3, 14, 21, 23}, 10, 5};
 
-  printf("-------------------\n");
-  printf("arr1: ");
-  Display(&arr1);
-  printf("arr2: ");
-  Display(&arr2);
+  // printf("-------------------\n");
+  // printf("arr1: ");
+  // Display(&arr1);
+  // printf("arr2: ");
+  // Display(&arr2);
 
-  Array *mergedArr = Merge(arr1, arr2);
-  printf("Arrays merged: ");
-  Display(mergedArr);
+  // Array *mergedArr = Merge(arr1, arr2);
+  // printf("Arrays merged: ");
+  // Display(mergedArr);
+
+  Array arr1 = {{2, 8, 10, 16, 5}, 10, 5};
+  Array arr2 = {{2, 21, 3, 10, 8}, 10, 5};
+
+  Array *unionArr = UnionUnsorted(arr1, arr2);
+  printf("Arrays union: ");
+  Display(unionArr);
 
   return 0;
 }
