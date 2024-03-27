@@ -536,4 +536,62 @@ Array *Array::intersectionSorted(Array arr) {
   return result;
 }
 
-int main() { return 0; }
+int main() {
+  Array *arr1;
+
+  int ch, sz;
+  int x, index;
+
+  cout << "Enter Size of Array: ";
+  cin >> sz;
+
+  arr1 = new Array(sz);
+
+  do {
+    cout << "==== Menu ====" << endl;
+    cout << "1. Insert" << endl;
+    cout << "2. Remove" << endl;
+    cout << "3. Search" << endl;
+    cout << "4. Sum" << endl;
+    cout << "5. Display" << endl;
+    cout << "6. Exit" << endl;
+
+    cout << "Enter your choice: ";
+    cin >> ch;
+
+    switch (ch) {
+    case 1:
+      cout << "Enter an element: ";
+      cin >> x;
+      cout << "Enter an index: ";
+      cin >> index;
+      arr1->insert(index, x);
+      break;
+
+    case 2:
+      cout << "Enter index: ";
+      cin >> index;
+      x = arr1->remove(index);
+      cout << "Removed Element: " << x << endl;
+      break;
+
+    case 3:
+      cout << "Enter element to search: ";
+      cin >> x;
+      index = arr1->linearSearch(x);
+      cout << "Element found at index: " << index << endl;
+      break;
+
+    case 4:
+      cout << "Sum: " << arr1->sum() << endl;
+      break;
+
+    case 5:
+      cout << "Elements are: " << endl;
+      arr1->display();
+      break;
+    }
+  } while (ch < 6);
+
+  return 0;
+}
