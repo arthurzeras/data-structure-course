@@ -299,6 +299,42 @@ Array *UnionUnsorted(Array m, Array n) {
   return result;
 }
 
+Array *UnionSorted(Array m, Array n) {
+  Array *result = new Array;
+  result->length = 0;
+
+  int i = 0, j = 0, k = 0;
+
+  while (i < m.length && j < n.length) {
+    result->length++;
+
+    if (m.A[i] == n.A[j]) {
+      result->A[k++] = m.A[i++];
+      j++;
+      continue;
+    }
+
+    if (m.A[i] > n.A[j]) {
+      result->A[k++] = n.A[j++];
+      continue;
+    }
+
+    result->A[k++] = m.A[i++];
+  }
+
+  for (; i < m.length; i++) {
+    result->length++;
+    result->A[k++] = m.A[i];
+  }
+
+  for (; j < m.length; j++) {
+    result->length++;
+    result->A[k++] = n.A[j];
+  }
+
+  return result;
+}
+
 int main() {
   // Array arr = {{2, 3, 4, 5, 6}, 10, 5};
 
@@ -371,12 +407,19 @@ int main() {
   // printf("Arrays merged: ");
   // Display(mergedArr);
 
-  Array arr1 = {{2, 8, 10, 16, 5}, 10, 5};
-  Array arr2 = {{2, 21, 3, 10, 8}, 10, 5};
+  // Array arr1 = {{2, 8, 10, 16, 5}, 10, 5};
+  // Array arr2 = {{2, 21, 3, 10, 8}, 10, 5};
 
-  Array *unionArr = UnionUnsorted(arr1, arr2);
+  // Array *unionArr = UnionUnsorted(arr1, arr2);
+  // printf("Arrays union: ");
+  // Display(unionArr);
+
+  Array arr1 = {{2, 5, 8, 10, 16}, 10, 5};
+  Array arr2 = {{1, 3, 8, 16, 23}, 10, 5};
+
+  Array *unionSortedArr = UnionSorted(arr1, arr2);
   printf("Arrays union: ");
-  Display(unionArr);
+  Display(unionSortedArr);
 
   return 0;
 }
